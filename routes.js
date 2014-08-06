@@ -1,54 +1,30 @@
-var express = require('express');
-var router  = express.Router();
-var db      = require('./database');
+var express    = require('express');
+var router     = express.Router();
 var formidable = require('formidable');
-var fs = require('fs-extra');
+var Image      = require('./models/image')
 
-console.log("IAMGES: ");
 //console.log(images);
 
 router.use(function(req, res, next) {
-    console.log('middleware');
     // continue to the next route
     next();
 });
 
 router.route('/')
-.get(function(req, res) {
-    console.log('get index');
-    form = '<form action="" enctype="multipart/form-data" method="post">'+ 
-        '<input name="title" type="text" />'+ 
-        '<input multiple="multiple" name="upload" type="file" /> '+ 
-        '<input type="submit" value="Upload" />'+ 
-        '</form>';
-    res.send(form);
-})
-.post(function(req, res) {
-    console.log('saving a meme');
-    
-      var form = new formidable.IncomingForm();
-      form.parse(req, function(err, fields, files) {
-          res.send('request success?');
-      });
-
-      form.on('end', function(fields, files) {
-        /* Temporary location of our uploaded file */
-        var temp_path = this.openedFiles[0].path;
-        /* The file name of the uploaded file */
-        var file_name = this.openedFiles[0].name;
-        /* Location where we want to copy the uploaded file */
-        var new_location = 'uploads/';
-
-        fs.copy(temp_path, new_location + file_name, function(err) {  
-          if (err) {
-              console.log('upload fail');
-            console.error(err);
-          } else {
-            console.log("upload success!");
-          }
+    .get(function(req, res) {
+        res.sendfile('public/upload.html');
+    })
+    .post(function(req, res) {
+        console.log('saving a meme');
+        var form = new formidable.IncomingForm();
+        form.parse(req, function(err, fields, files) {
+            res.send('request success?');
         });
-      });
-});
+        
+        form.on('end', function(fields, files) {
+            Image.save(this.openedFiles[0]);
+        });
+    });
 
 
 // general get all and save memes
