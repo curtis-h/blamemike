@@ -16,15 +16,20 @@ exports.save = function(file) {
     /* The file name of the uploaded file */
     var file_name = file.name;
     /* Location where we want to copy the uploaded file */
-    var new_location = 'uploads/';
+    var new_location = 'uploads/'+file_name;
 
-    fs.copy(temp_path, new_location + file_name, function(err) {
+    fs.copy(temp_path, new_location, function(err) {
         if (err) {
             console.log('upload fail');
             console.error(err);
         }
         else {
             console.log("upload success!");
+            var i = new db.Image({
+                name: 'test',
+                path: new_location
+            });
+            i.save();
         }
     });
 };
