@@ -1,33 +1,32 @@
 var db = require('../database');
 var fs = require('fs-extra');
 
+function randomName() {
+    return Math.random().toString(36).substring(2);
+}
+
 exports.save = function(file) {
     console.log('saveing'+file.name);
     
     /*
      * TODO
-     * save to DB
-     * randomize file name
      * add validation
      */
     
-    /* Temporary location of our uploaded file */
-    var temp_path = file.path;
-    /* The file name of the uploaded file */
     var file_name = file.name;
-    /* Location where we want to copy the uploaded file */
-    var new_location = 'uploads/'+file_name;
-
-    fs.copy(temp_path, new_location, function(err) {
+    var temp_path = file.path;
+    var new_path  = 'uploads/'+randomName();
+    
+    fs.copy(temp_path, new_path, function(err) {
         if (err) {
             console.log('upload fail');
             console.error(err);
         }
         else {
-            console.log("upload success!");
+            console.log("upload success : "+new_path);
             var i = new db.Image({
-                name: 'test',
-                path: new_location
+                name: file_name,
+                path: new_path
             });
             i.save();
         }
