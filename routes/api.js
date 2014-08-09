@@ -1,9 +1,7 @@
 var express    = require('express');
 var router     = express.Router();
 var formidable = require('formidable');
-var Image      = require('./models/image')
-
-//console.log(images);
+var Image      = require('../models/image')
 
 router.use(function(req, res, next) {
     // continue to the next route
