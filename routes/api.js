@@ -16,11 +16,14 @@ router.route('/')
         console.log('saving a meme');
         var form = new formidable.IncomingForm();
         form.parse(req, function(err, fields, files) {
-            res.send('request success?');
-        });
-        
-        form.on('end', function(fields, files) {
-            Image.save(this.openedFiles[0]);
+            // do something here?
+        })
+        .on('end', function(fields, files) {
+            var response = 'Request Failed';
+            if(Image.save(this.openedFiles[0])) {
+                response = 'request winned';
+            }
+            res.send(response);
         });
     });
 

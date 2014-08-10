@@ -6,12 +6,10 @@ function randomName() {
 }
 
 exports.save = function(file) {
-    console.log('saveing'+file.name);
-    
-    /*
-     * TODO
-     * add validation
-     */
+    console.log(file.type);
+    if(file.type != 'image/png' || file.type != 'image/jpeg') {
+        return false;
+    }
     
     var file_name = file.name;
     var temp_path = file.path;
@@ -31,4 +29,6 @@ exports.save = function(file) {
             i.save();
         }
     });
+    
+    return true;
 };
