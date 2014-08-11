@@ -40,7 +40,15 @@ router.route('/memes')
 router.route('/memes/:meme_id')
     .get(function(req, res) {
         console.log('meme id  '+req.params.meme_id+' requested');
-        res.json({meme_id: req.params.meme_id});
+        Image.find(req.params.meme_id, function(err, image) {
+            if(err || typeof(image) == 'undefined' || image == null) {
+                // TODO - send example error page
+                res.send('there has been an error');
+            }
+            else {
+                res.sendfile(image.path);
+            }
+        });
     });
 
 /*

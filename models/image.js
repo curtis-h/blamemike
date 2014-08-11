@@ -5,15 +5,19 @@ function randomName() {
     return Math.random().toString(36).substring(2);
 }
 
+exports.find = function(id, callback) {
+    db.Image.findOne({'_id': id}, 'path', callback);
+}
+
 exports.save = function(file) {
     console.log(file.type);
-    if(file.type != 'image/png' || file.type != 'image/jpeg') {
+    if(file.type != 'image/png' && file.type != 'image/jpeg') {
         return false;
     }
     
-    var file_name = file.name;
+    var type      = file.type == 'image/png' ? 'png' : 'jpg';;
     var temp_path = file.path;
-    var new_path  = 'uploads/'+randomName();
+    var new_path  = 'uploads/'+randomName()+'.'+type;
     
     fs.copy(temp_path, new_path, function(err) {
         if (err) {
@@ -23,7 +27,7 @@ exports.save = function(file) {
         else {
             console.log("upload success : "+new_path);
             var i = new db.Image({
-                name: file_name,
+                name: file.name,
                 path: new_path
             });
             i.save();
