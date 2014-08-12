@@ -3,7 +3,7 @@ var router  = express.Router();
 
 router.use(function(req, res, next) {
     // TODO - create proper index page
-    res.sendfile('public/example.html');
+    res.sendfile('public/index.html');
 });
 
 module.exports = router;

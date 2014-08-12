@@ -9,7 +9,7 @@ function init() {
     
     app.use(parser.json());
     app.use('/api', api);
-    app.use('/', base);
+    app.use('/', express.static(__dirname+'/public'));
     app.listen(config.port);
     console.log('Server running on port '+config.port);
 };
