@@ -8,10 +8,17 @@ router.use(function(req, res, next) {
     next();
 });
 
+
+//general get all and save memes
 router.route('/')
     .get(function(req, res) {
-        res.sendfile('public/upload.html');
+        //res.sendfile('public/upload.html');
+        // TODO - get a list of all memes
+        Image.all(function(err, images) {
+            res.json(images);
+        });
     })
+    // save an image
     .post(function(req, res) {
         console.log('saving a meme');
         var form = new formidable.IncomingForm();
@@ -27,17 +34,8 @@ router.route('/')
         });
     });
 
-
-// general get all and save memes
-router.route('/memes')
-    .get(function(req, res) {
-        console.log('getting all memes');
-        console.log(images.find());
-        res.json({memes: 'nomemes'});
-    });
-    
 // do something when we have an ID
-router.route('/memes/:meme_id')
+router.route('/:meme_id')
     .get(function(req, res) {
         console.log('meme id  '+req.params.meme_id+' requested');
         Image.find(req.params.meme_id, function(err, image) {

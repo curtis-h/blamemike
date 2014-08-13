@@ -5,10 +5,23 @@ function randomName() {
     return Math.random().toString(36).substring(2);
 }
 
+/**
+ * get all the images
+ */
+exports.all = function(callback) {
+    db.Image.find({}, '_id name path', callback);
+}
+
+/**
+ * get a single image by the id
+ */
 exports.find = function(id, callback) {
     db.Image.findOne({'_id': id}, 'path', callback);
 }
 
+/**
+ * save an image in the db and move it to the correct path
+ */
 exports.save = function(file) {
     console.log(file.type);
     if(file.type != 'image/png' && file.type != 'image/jpeg') {
