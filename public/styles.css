@@ -1,11 +1,22 @@
 * {
     box-sizing: border-box;
+    position: relative;
     text-align: center;
 }
 
-.imageArea {
-    background-color: green;
+.row1 {
+    
+}
+
+.row2 {
+    background-color: rgba(41,154,11,1);
     box-shadow: 0px 5px 6px 3px #444;
     color: white;
-    
+    padding-bottom: 2em;
+    z-index: 100;
+}
+
+.row3 {
+    background-color: #555;
+    color: white;
 }

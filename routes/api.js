@@ -12,8 +12,6 @@ router.use(function(req, res, next) {
 //general get all and save memes
 router.route('/')
     .get(function(req, res) {
-        //res.sendfile('public/upload.html');
-        // TODO - get a list of all memes
         Image.all(function(err, images) {
             res.json(images);
         });
