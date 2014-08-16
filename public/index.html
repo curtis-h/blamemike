@@ -6,6 +6,7 @@
     
     <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="styles.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
@@ -13,18 +14,22 @@
         <img src="assets/blamemike.jpg" />
     </div>
     <div class="container-fluid row2">
-        <h2>This is the image area</h2>
-        <div class="imageArea col-xs-12 col-md-12">
-            Need to ajax the images in. Wanna use angular though
+        <h2>Blame Everything</h2>
+        <div class="imageArea col-md-12">
+            <p>No Images</p>
         </div>
+        <input class="action" type="button" value="Choose a picture" />
     </div>
     <div class="container-fluid row3">
-        <h3>This is an upload area?</h3>
-        Need to make this nice. Use section overlay buttons as call to action?
+        <h3>Or Upload Your Own</h3>
+        <p>Need to make this nice. Use section overlay buttons as call to action?</p>
         <form action="/memes" enctype="multipart/form-data" method="post">
-            <input multiple="multiple" name="upload" type="file" />
-            <input type="submit" value="Upload" />
+                <input id="uploader" multiple="multiple" name="upload" type="file" />
+                <input type="submit" value="Upload" class="action" />
         </form>
+    </div>
+    <div class="container-fluid row1">
+        <h2>This is the footer</h2>
     </div>
 </body>
 </html>
