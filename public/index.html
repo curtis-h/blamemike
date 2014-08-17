@@ -18,18 +18,14 @@
         <div class="imageArea col-md-12">
             <p>No Images</p>
         </div>
-        <input class="action" type="button" value="Choose a picture" />
+        <form id="uploadForm" action="/memes" enctype="multipart/form-data" method="post">
+            <input id="uploader" name="upload" type="file" />
+            <input id="uploadBtn" type="button" value="Or Upload Your Own" class="action" />
+        </form>
     </div>
     <div class="container-fluid row3">
         <h3>Or Upload Your Own</h3>
         <p>Need to make this nice. Use section overlay buttons as call to action?</p>
-        <form action="/memes" enctype="multipart/form-data" method="post">
-                <input id="uploader" multiple="multiple" name="upload" type="file" />
-                <input type="submit" value="Upload" class="action" />
-        </form>
-    </div>
-    <div class="container-fluid row1">
-        <h2>This is the footer</h2>
     </div>
 </body>
 </html>

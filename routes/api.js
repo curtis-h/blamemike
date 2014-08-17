@@ -8,7 +8,6 @@ router.use(function(req, res, next) {
     next();
 });
 
-
 //general get all and save memes
 router.route('/')
     .get(function(req, res) {

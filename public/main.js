@@ -1,4 +1,38 @@
-function setupHandlers(container) {
+function setupUploadHandlers() {
+    $("#uploadForm").submit(function(ev) {
+        var el   = $(this);
+        var url  = el.attr('action');
+        var data = new FormData(this);
+        
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data, status) {
+                 // TODO - notify success
+            },
+            error: function(data, status) {
+                // TODO - notify failure
+            }
+        });
+        
+        ev.preventDefault();
+        return false;
+    });
+    
+    $("#uploader").change(function() {
+        $("#uploadForm").submit();
+    });
+    
+    $("#uploadBtn").click(function() {
+        $("#uploader").click();
+    });
+}
+
+function setupImgHandlers(container) {
     container.find('img').click(function() {
         
     });
@@ -16,11 +50,12 @@ function getImages() {
                 }
             }
             
-            setupHandlers(imageArea);
+            setupImgHandlers(imageArea);
         }
     });
 }
 
 $(function(){
+    setupUploadHandlers();
     getImages();
 });
