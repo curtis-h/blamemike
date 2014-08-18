@@ -23,11 +23,15 @@ router.route('/')
             // do something here?
         })
         .on('end', function(fields, files) {
-            var response = 'Request Failed';
-            if(Image.save(this.openedFiles[0])) {
-                response = 'request winned';
+            var img = Image.save(this.openedFiles[0])
+            if(img) {
+                res.json(img);
             }
-            res.send(response);
+            else {
+                var response = '0';
+                res.send(response);
+            }
+            
         });
     });
 

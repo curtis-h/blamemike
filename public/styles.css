@@ -57,7 +57,35 @@ form {
 .imageArea .imgContainer img {
     max-width: 100%;
 }
+.imageArea .imgContainer p {
+    display: none;
+    font-size: 5em;
+    height: 51%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.imageArea .imgContainer p span{
+    padding-top: 20%;
+}
+.imageArea .imgContainer p:hover {
+    opacity: 0.9;
+}
+.imageArea .imgContainer .select {
+    background-color: white;
+    color: rgba(255,93,177,1);
+}
+.imageArea .imgContainer .edit {
+    background-color: rgba(255,93,177,1);
+    color: white;
+    top: 50%;
+}
 
+#uploadForm {
+    height: 0px;
+}
 #uploader {
     display: none;
 }

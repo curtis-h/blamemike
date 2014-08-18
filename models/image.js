@@ -23,14 +23,19 @@ exports.find = function(id, callback) {
  * save an image in the db and move it to the correct path
  */
 exports.save = function(file) {
-    console.log(file.type);
-    if(file.type != 'image/png' && file.type != 'image/jpeg') {
+    if(typeof(file) == 'undefined' || typeof(file.type) == 'undefined' || (file.type != 'image/png' && file.type != 'image/jpeg')) {
         return false;
     }
     
     var type      = file.type == 'image/png' ? 'png' : 'jpg';;
     var temp_path = file.path;
     var new_path  = 'uploads/'+randomName()+'.'+type;
+
+    var i = new db.Image({
+        name: file.name,
+        path: new_path
+    });
+    i.save();
     
     fs.copy(temp_path, new_path, function(err) {
         if (err) {
@@ -39,13 +44,8 @@ exports.save = function(file) {
         }
         else {
             console.log("upload success : "+new_path);
-            var i = new db.Image({
-                name: file.name,
-                path: new_path
-            });
-            i.save();
         }
     });
     
-    return true;
+    return i;
 };

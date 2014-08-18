@@ -12,7 +12,10 @@ function setupUploadHandlers() {
             contentType: false,
             processData: false,
             success: function(data, status) {
-                 // TODO - notify success
+                if(typeof(data._id) != 'undefined') {
+                    addImage(data);
+                    setupImgHandlers();
+                }
             },
             error: function(data, status) {
                 // TODO - notify failure
@@ -33,9 +36,26 @@ function setupUploadHandlers() {
 }
 
 function setupImgHandlers(container) {
-    container.find('img').click(function() {
-        
+    var area = $(".imageArea");
+    area.find('img').off().click(function() {
+        $('.select, .edit').hide();
+        $(this).parent().find('.select, .edit').show();
     });
+    
+    area.find('.select').off().click(function() {
+        
+        window.prompt ("URL for this image", 'curtis wos what');
+    });
+}
+
+function addImage(image) {
+    $(".imageArea").append(
+        '<div class="imgContainer col-xs-12 col-md-4">'+
+        '<img src="/memes/'+image._id+'" />'+
+        '<p class="select"><span>select</span></p>'+
+        '<p class="edit">edit</p>'+
+        '</div>'
+    );
 }
 
 function getImages() {
@@ -45,12 +65,11 @@ function getImages() {
             imageArea.empty();
             for(i in images) {
                 if(images.hasOwnProperty(i)) {
-                    var image = images[i];
-                    imageArea.append('<div class="imgContainer col-xs-12 col-md-4"><img src="/memes/'+image._id+'" /></div>');
+                    addImage(images[i]);
                 }
             }
             
-            setupImgHandlers(imageArea);
+            setupImgHandlers();
         }
     });
 }
