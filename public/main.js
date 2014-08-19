@@ -43,8 +43,7 @@ function setupImgHandlers(container) {
     });
     
     area.find('.select').off().click(function() {
-        
-        window.prompt ("URL for this image", 'curtis wos what');
+        window.prompt ("URL for this image\nCopy and use however you like", $(this).parent('.imgContainer').find('img').get(0).src);
     });
 }
 

@@ -58,6 +58,7 @@ form {
     max-width: 100%;
 }
 .imageArea .imgContainer p {
+	cursor: pointer;
     display: none;
     font-size: 5em;
     height: 51%;
