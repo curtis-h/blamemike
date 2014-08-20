@@ -45,6 +45,10 @@ exports.save = function(file) {
         else {
             console.log("upload success : "+new_path);
         }
+
+        fs.remove(temp_path, function() {
+            console.log("removing: "+temp_path);
+        });
     });
     
     return i;
